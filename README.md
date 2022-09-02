@@ -1,38 +1,38 @@
 # fscan
 
-# 1. 简介
-一款内网综合扫描工具，方便一键自动化、全方位漏扫扫描。   
-支持主机存活探测、端口扫描、常见服务的爆破、ms17010、redis批量写公钥、计划任务反弹shell、读取win网卡信息、web指纹识别、web漏洞扫描、netbios探测、域控识别等功能。
+# 1. Introduction
+A comprehensive intranet scanning tool, which is convenient for one-click automation and all-round missed scanning.
+Support host survival detection, port scanning, blasting of common services, ms17010, redis batch write public key, scheduled task rebound shell, read win network card information, web fingerprint identification, web vulnerability scanning, netbios detection, domain control identification and other functions.
 
-# 2. 主要功能
-1.信息搜集:
-* 存活探测(icmp)
-* 端口扫描
+# 2. The main function
+1. Information collection:
+* liveness detection(icmp)
+* port scan
 
-2.爆破功能:
-* 各类服务爆破(ssh、smb、rdp等)
-* 数据库密码爆破(mysql、mssql、redis、psql、oracle等)  
+2.Blasting function:
+* All kinds of service blasting(ssh, smb, rdp, etc.)
+* Database password blasting(mysql、mssql、redis、psql、oracle, etc.)  
 
-3.系统信息、漏洞扫描:  
-* netbios探测、域控识别  
-* 获取目标网卡信息
-* 高危漏洞扫描(ms17010等)  
+3.System Information, Vulnerability Scan:  
+* netbios detection, domain controller identification
+* Get target network card information
+* High Risk Vulnerability Scanning(ms17010, etc.)  
 
-4.Web探测功能:
-* webtitle探测
-* web指纹识别(常见cms、oa框架等)
-* web漏洞扫描(weblogic、st2等,支持xray的poc)
+4.Web detection function:
+* webtitle detection
+* Web fingerprinting (common cms, oa framework, etc.)
+* Web vulnerability scanning (weblogic, st2, etc., poc that supports xray)
 
-5.漏洞利用:
-* redis写公钥或写计划任务  
-* ssh命令执行  
-* ms17017利用(植入shellcode),如添加用户等  
+5.Exploit:
+* redis write public key or write scheduled task  
+* ssh command execution  
+* ms17017 use (insert shellcode), such as adding users, etc.
 
-6.其他功能:
-* 文件保存
+6.Other functions:
+* file save
 
-# 3. 使用说明
-简单用法
+# 3. Instructions for use
+Simple usage
 ``` 
 fscan.exe -h 192.168.1.1/24  (默认使用全部模块)
 fscan.exe -h 192.168.1.1/16  (B段扫描)
@@ -57,95 +57,95 @@ fscan.exe -h 192.168.1.1/24 -pa 3389 (在原基础上,加入3389->rdp扫描)
 fscan.exe -h 192.168.1.1/24 -socks5 127.0.0.1:1080
 fscan.exe -h 192.168.1.1/24 -m ms17010 -sc add (内置添加用户等功能,只适用于备选工具,更推荐其他ms17010的专项利用工具)
 ```
-编译命令
+Compile command
 ```
 go build -ldflags="-s -w " -trimpath main.go
 upx -9 fscan.exe (可选,压缩体积)
 ```
 
-完整参数
+Full parameters
 ```
-  -c string
-        ssh命令执行
+-c string
+        ssh command execution
   -cookie string
-        设置cookie
+        set cookies
   -debug int
-        多久没响应,就打印当前进度(default 60)
+        How long has no response, print the current progress (default 60)
   -domain string
-        smb爆破模块时,设置域名
+        When smb blasts the module, set the domain name
   -h string
-        目标ip: 192.168.11.11 | 192.168.11.11-255 | 192.168.11.11,192.168.11.12
+        target ip: 192.168.11.11 | 192.168.11.11-255 | 192.168.11.11,192.168.11.12
   -hf string
-        读取文件中的目标
+        read target from file
   -hn string
-        扫描时,要跳过的ip: -hn 192.168.1.1/24
+        When scanning, ip to skip: -hn 192.168.1.1/24
   -m string
-        设置扫描模式: -m ssh (default "all")
+        Set scan mode: -m ssh (default "all")
   -no
-        扫描结果不保存到文件中
+        Scan results are not saved to file
   -nobr
-        跳过sql、ftp、ssh等的密码爆破
+        Skip password blasting for sql, ftp, ssh, etc.
   -nopoc
-        跳过web poc扫描
+        skip web poc scan
   -np
-        跳过存活探测
+        skip liveness detection
   -num int
-        web poc 发包速率  (default 20)
+        web poc packet sending rate (default 20)
   -o string
-        扫描结果保存到哪 (default "result.txt")
+        Where to save scan results (default "result.txt")
   -p string
-        设置扫描的端口: 22 | 1-65535 | 22,80,3306 (default "21,22,80,81,135,139,443,445,1433,3306,5432,6379,7001,8000,8080,8089,9000,9200,11211,27017")
+        Set the port to scan: 22 | 1-65535 | 22,80,3306 (default "21,22,80,81,135,139,443,445,1433,3306,5432,6379,7001,8000,8080,8089,9000,9200,11211,27017 ")
   -pa string
-        新增需要扫描的端口,-pa 3389 (会在原有端口列表基础上,新增该端口)
+        Add the port to be scanned, -pa 3389 (the port will be added based on the original port list)
   -path string
-        fcgi、smb romote file path
+        fcgi, smb romote file path
   -ping
-        使用ping代替icmp进行存活探测
+        Use ping instead of icmp for liveness detection
   -pn string
-        扫描时要跳过的端口,as: -pn 445
+        Port to skip when scanning, as: -pn 445
   -pocname string
-        指定web poc的模糊名字, -pocname weblogic
+        Specify the ambiguous name of the web poc, -pocname weblogic
   -proxy string
-        设置代理, -proxy http://127.0.0.1:8080
+        Set proxy, -proxy http://127.0.0.1:8080
   -user string
-        指定爆破时的用户名
+        Specify the username when blasting
   -userf string
-        指定爆破时的用户名文件
+        Specify the username file when blasting
   -pwd string
-        指定爆破时的密码
+        Specify the password when blasting
   -pwdf string
-        指定爆破时的密码文件
+        Specify the password file when blasting
   -rf string
-        指定redis写公钥用模块的文件 (as: -rf id_rsa.pub)
+        The file specifying the module for redis to write the public key (as: -rf id_rsa.pub)
   -rs string
-        redis计划任务反弹shell的ip端口 (as: -rs 192.168.1.1:6666)
+        The ip port of the redis scheduled task bounce shell (as: -rs 192.168.1.1:6666)
   -silent
-        静默扫描,适合cs扫描时不回显
+        Silent scan, suitable for cs scan without echo
   -sshkey string
-        ssh连接时,指定ssh私钥
+        When connecting with ssh, specify the ssh private key
   -t int
-        扫描线程 (default 600)
+        scan thread (default 600)
   -time int
-        端口扫描超时时间 (default 3)
+        Port scan timeout (default 3)
   -u string
-        指定Url扫描
+        Specify Url to scan
   -uf string
-        指定Url文件扫描
+        Specify Url file scan
   -wt int
-        web访问超时时间 (default 5)
+        web access timeout (default 5)
   -pocpath string
-        指定poc路径
+        Specify the poc path
   -usera string
-        在原有用户字典基础上,新增新用户
+        On the basis of the original user dictionary, add new users
   -pwda string
-        在原有密码字典基础上,增加新密码
+        On the basis of the original password dictionary, add a new password
   -socks5
-        指定socks5代理 (as: -socks5  socks5://127.0.0.1:1080)
-  -sc 
-        指定ms17010利用模块shellcode,内置添加用户等功能 (as: -sc add)
+        Specify socks5 proxy (as: -socks5 socks5://127.0.0.1:1080)
+  -sc
+        Specify ms17010 to use module shellcode, built-in functions such as adding users (as: -sc add)
 ```
 
-# 4. 运行截图
+# 4. Run screenshot
 
 `fscan.exe -h 192.168.x.x  (全功能、ms17010、读取网卡信息)`
 ![](image/1.png)
@@ -170,18 +170,18 @@ upx -9 fscan.exe (可选,压缩体积)
 `go run .\main.go -h 192.0.0.0/8 -m icmp(探测每个C段的网关和数个随机IP,并统计top 10 B、C段存活数量)`
 ![img.png](image/live.png)
 
-# 5. 免责声明
+# 5. Disclaimer
 
-本工具仅面向**合法授权**的企业安全建设行为，如您需要测试本工具的可用性，请自行搭建靶机环境。
+This tool is only for **legally authorized** enterprise security construction behavior. If you need to test the usability of this tool, please build a target environment by yourself.
 
-为避免被恶意使用，本项目所有收录的poc均为漏洞的理论判断，不存在漏洞利用过程，不会对目标发起真实攻击和漏洞利用。
+In order to avoid malicious use, all POCs included in this project are theoretical judgments of vulnerabilities, there is no vulnerability exploitation process, and no real attacks or exploits will be launched on the target.
 
-在使用本工具进行检测时，您应确保该行为符合当地的法律法规，并且已经取得了足够的授权。**请勿对非授权目标进行扫描。**
+When using this tool for testing, you should ensure that the behavior complies with local laws and regulations and has obtained sufficient authorization. **Do not scan unauthorized targets. **
 
-如您在使用本工具的过程中存在任何非法行为，您需自行承担相应后果，我们将不承担任何法律及连带责任。
+If you have any illegal behavior in the process of using this tool, you shall bear the corresponding consequences by yourself, and we will not bear any legal and joint responsibility.
 
-在安装并使用本工具前，请您**务必审慎阅读、充分理解各条款内容**，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。
-除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要安装并使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
+Before installing and using this tool, please **must read carefully and fully understand the content of each clause**. Restrictions, disclaimers or other clauses involving your significant rights and interests may be bolded or underlined to remind you to pay attention .
+Unless you have fully read, fully understood and accepted all the terms of this agreement, please do not install and use this tool. Your use behavior or your acceptance of this Agreement in any other express or implied manner shall be deemed that you have read and agreed to be bound by this Agreement.
 
 
 # 6. 404StarLink 2.0 - Galaxy
@@ -195,10 +195,10 @@ fscan 是 404Team [星链计划2.0](https://github.com/knownsec/404StarLink2.0-G
 # 7. Star Chart
 [![Stargazers over time](https://starchart.cc/shadow1ng/fscan.svg)](https://starchart.cc/shadow1ng/fscan)
 
-# 8. 捐赠
- 如果你觉得这个项目对你有帮助，你可以请作者喝饮料🍹 [点我](image/sponsor.png)
+# 8. donate
+If you find this project helpful, you can invite the author for a drink🍹 [点我](image/sponsor.png)
 
-# 9. 参考链接
+# 9. Reference link
 https://github.com/Adminisme/ServerScan  
 https://github.com/netxfly/x-crack  
 https://github.com/hack2fun/Gscan  
@@ -206,7 +206,7 @@ https://github.com/k8gege/LadonGo
 https://github.com/jjf012/gopoc
 
 
-# 10. 最近更新
+# 10. latest update
 [+] 2022/7/14 -hf 支持host:port和host/xx:port格式,rule.Search 正则匹配范围从body改成header+body,-nobr不再包含-nopoc.优化webtitle 输出格式  
 [+] 2022/7/6 加入手工gc回收,尝试节省无用内存。 -url 支持逗号隔开。 修复一个poc模块bug。-nobr不再包含-nopoc。  
 [+] 2022/7/2 加强poc fuzz模块,支持跑备份文件、目录、shiro-key(默认跑10key,可用-full参数跑100key)等。新增ms17017利用(使用参数: -sc add),可在ms17010-exp.go自定义shellcode,内置添加用户等功能。  
