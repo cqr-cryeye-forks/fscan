@@ -65,84 +65,94 @@ upx -9 fscan.exe (可选,压缩体积)
 
 Full parameters
 ```
--c string
-        ssh command execution
+  -br int
+        Brute threads (default 1)
+  -c string
+        exec command (ssh)
   -cookie string
-        set cookies
+        set poc cookie,-cookie rememberMe=login
   -debug int
-        How long has no response, print the current progress (default 60)
+        every time to LogErr (default 60)
+  -dns
+        using dnslog poc
   -domain string
-        When smb blasts the module, set the domain name
+        smb domain
+  -full
+        poc full scan,as: shiro 100 key
   -h string
-        target ip: 192.168.11.11 | 192.168.11.11-255 | 192.168.11.11,192.168.11.12
+        IP address of the host you want to scan,for example: 192.168.11.11 | 192.168.11.11-255 | 192.168.11.11,192.168.11.12
   -hf string
-        read target from file
+        host file, -hf ip.txt
   -hn string
-        When scanning, ip to skip: -hn 192.168.1.1/24
+        the hosts no scan,as: -hn 192.168.1.1/24
   -m string
-        Set scan mode: -m ssh (default "all")
+        Select scan type ,as: -m ssh (default "all")
   -no
-        Scan results are not saved to file
+        not to save output log
   -nobr
-        Skip password blasting for sql, ftp, ssh, etc.
+        not to Brute password
   -nopoc
-        skip web poc scan
+        not to scan web vul
   -np
-        skip liveness detection
+        not to ping
   -num int
-        web poc packet sending rate (default 20)
+        poc rate (default 20)
   -o string
-        Where to save scan results (default "result.txt")
+        Outputfile (default "result.txt")
   -p string
-        Set the port to scan: 22 | 1-65535 | 22,80,3306 (default "21,22,80,81,135,139,443,445,1433,3306,5432,6379,7001,8000,8080,8089,9000,9200,11211,27017 ")
+        Select a port,for example: 22 | 1-65535 | 22,80,3306 (default "21,22,80,81,135,139,443,445,1433,1521,3306,5432,6379,7001,8000,8080,8089,9000,9200,11211,27017")
   -pa string
-        Add the port to be scanned, -pa 3389 (the port will be added based on the original port list)
+        add port base DefaultPorts,-pa 3389
   -path string
-        fcgi, smb romote file path
+        fcgi、smb romote file path
   -ping
-        Use ping instead of icmp for liveness detection
+        using ping replace icmp
   -pn string
-        Port to skip when scanning, as: -pn 445
+        the ports no scan,as: -pn 445
   -pocname string
-        Specify the ambiguous name of the web poc, -pocname weblogic
-  -proxy string
-        Set proxy, -proxy http://127.0.0.1:8080
-  -user string
-        Specify the username when blasting
-  -userf string
-        Specify the username file when blasting
-  -pwd string
-        Specify the password when blasting
-  -pwdf string
-        Specify the password file when blasting
-  -rf string
-        The file specifying the module for redis to write the public key (as: -rf id_rsa.pub)
-  -rs string
-        The ip port of the redis scheduled task bounce shell (as: -rs 192.168.1.1:6666)
-  -silent
-        Silent scan, suitable for cs scan without echo
-  -sshkey string
-        When connecting with ssh, specify the ssh private key
-  -t int
-        scan thread (default 600)
-  -time int
-        Port scan timeout (default 3)
-  -u string
-        Specify Url to scan
-  -uf string
-        Specify Url file scan
-  -wt int
-        web access timeout (default 5)
+        use the pocs these contain pocname, -pocname weblogic
   -pocpath string
-        Specify the poc path
-  -usera string
-        On the basis of the original user dictionary, add new users
+        poc file path
+  -portf string
+        Port File
+  -proxy string
+        set poc proxy, -proxy http://127.0.0.1:8080
+  -pwd string
+        password
   -pwda string
-        On the basis of the original password dictionary, add a new password
-  -socks5
-        Specify socks5 proxy (as: -socks5 socks5://127.0.0.1:1080)
-  -sc
-        Specify ms17010 to use module shellcode, built-in functions such as adding users (as: -sc add)
+        add a password base DefaultPasses,-pwda password
+  -pwdf string
+        password file
+  -rf string
+        redis file to write sshkey file (as: -rf id_rsa.pub) 
+  -rs string
+        redis shell to write cron file (as: -rs 192.168.1.1:6666) 
+  -sc string
+        ms17 shellcode,as -sc add
+  -silent
+        silent scan
+  -socks5 string
+        set socks5 proxy, will be used in tcp connection, timeout setting will not work
+  -sshkey string
+        sshkey file (id_rsa)
+  -t int
+        Thread nums (default 600)
+  -time int
+        Set timeout (default 3)
+  -top int
+        show live len top (default 10)
+  -u string
+        url
+  -uf string
+        urlfile
+  -user string
+        username
+  -usera string
+        add a user base DefaultUsers,-usera user
+  -userf string
+        username file
+  -wt int
+        Set web timeout (default 5)
 ```
 
 # 4. Run screenshot
