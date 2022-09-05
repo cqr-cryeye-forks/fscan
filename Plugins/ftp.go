@@ -55,7 +55,7 @@ func FtpConn(info *common.HostInfo, user string, pass string) (flag bool, err er
 		err = conn.Login(Username, Password)
 		if err == nil {
 			flag = true
-			result := fmt.Sprintf("[+] ftp://%v:%v:%v %v", Host, Port, Username, Password)
+			result := fmt.Sprintf("[+] ftp://%v:%v FTP found user:%v password:%v", Host, Port, Username, Password)
 			dirs, err := conn.List("")
 			//defer conn.Logout()
 			if err == nil {

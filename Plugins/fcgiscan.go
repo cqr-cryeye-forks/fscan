@@ -96,16 +96,16 @@ func FcgiScan(info *common.HostInfo) {
 	if strings.Contains(string(stdout), cutLine) { //命令成功回显
 		output = strings.SplitN(string(stdout), cutLine, 2)[0]
 		if len(stderr) > 0 {
-			result = fmt.Sprintf("[+] FCGI:%v:%v \n%vstderr:%v\nplesa try other path,as -path /www/wwwroot/index.php", info.Host, info.Ports, output, string(stderr))
+			result = fmt.Sprintf("[+] %v:%v FCGI %vstderr:%v Please try other path,as -path /www/wwwroot/index.php", info.Host, info.Ports, output, string(stderr))
 		} else {
-			result = fmt.Sprintf("[+] FCGI:%v:%v \n%v", info.Host, info.Ports, output)
+			result = fmt.Sprintf("[+] %v:%v FCGI %v", info.Host, info.Ports, output)
 		}
 		common.LogSuccess(result)
 	} else if strings.Contains(string(stdout), "File not found") || strings.Contains(string(stdout), "Content-type") || strings.Contains(string(stdout), "Status") {
 		if len(stderr) > 0 {
-			result = fmt.Sprintf("[+] FCGI:%v:%v \n%vstderr:%v\nplesa try other path,as -path /www/wwwroot/index.php", info.Host, info.Ports, string(stdout), string(stderr))
+			result = fmt.Sprintf("[+] %v:%v FCGI: %vstderr:%v Please try other path,as -path /www/wwwroot/index.php", info.Host, info.Ports, string(stdout), string(stderr))
 		} else {
-			result = fmt.Sprintf("[+] FCGI:%v:%v \n%v", info.Host, info.Ports, string(stdout))
+			result = fmt.Sprintf("[+] %v:%v FCGI %v", info.Host, info.Ports, string(stdout))
 		}
 		common.LogSuccess(result)
 	}

@@ -74,9 +74,9 @@ func worker(host, domain string, port int, wg *sync.WaitGroup, brlist chan Brute
 		if flag == true && err == nil {
 			var result string
 			if domain != "" {
-				result = fmt.Sprintf("[+] RDP:%v:%v:%v\\%v %v", host, port, domain, user, pass)
+				result = fmt.Sprintf("[+] %v:%v RDP Detected:%v user:%v password:%v", host, port, domain, user, pass)
 			} else {
-				result = fmt.Sprintf("[+] RDP:%v:%v:%v %v", host, port, user, pass)
+				result = fmt.Sprintf("[+] %v:%v RDP Detected user:%v password:%v", host, port, user, pass)
 			}
 			common.LogSuccess(result)
 			*signal = true

@@ -129,7 +129,7 @@ func MS17010Scan(info *common.HostInfo) error {
 		//fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
 		//if runtime.GOOS=="windows" {fmt.Printf("%s\tMS17-010\t(%s)\n", ip, os)
 		//} else{fmt.Printf("\033[33m%s\tMS17-010\t(%s)\033[0m\n", ip, os)}
-		result := fmt.Sprintf("[+] %s\tMS17-010\t(%s)", ip, os)
+		result := fmt.Sprintf("[+] %s \tMS17-010\t(%s)", ip, os)
 		common.LogSuccess(result)
 		defer func() {
 			if common.SC != "" {

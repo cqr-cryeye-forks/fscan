@@ -72,11 +72,11 @@ func RedisConn(info *common.HostInfo, pass string) (flag bool, err error) {
 		flag = true
 		dbfilename, dir, err = getconfig(conn)
 		if err != nil {
-			result := fmt.Sprintf("[+] Redis:%s %s", realhost, pass)
+			result := fmt.Sprintf("[+] %s Redis %s", realhost, pass)
 			common.LogSuccess(result)
 			return flag, err
 		} else {
-			result := fmt.Sprintf("[+] Redis:%s %s file:%s/%s", realhost, pass, dir, dbfilename)
+			result := fmt.Sprintf("[+] %s Redis %s file:%s/%s", realhost, pass, dir, dbfilename)
 			common.LogSuccess(result)
 		}
 		err = Expoilt(realhost, conn)
@@ -112,11 +112,11 @@ func RedisUnauth(info *common.HostInfo) (flag bool, err error) {
 		flag = true
 		dbfilename, dir, err = getconfig(conn)
 		if err != nil {
-			result := fmt.Sprintf("[+] Redis:%s unauthorized", realhost)
+			result := fmt.Sprintf("[+] %s Redis unauthorized", realhost)
 			common.LogSuccess(result)
 			return flag, err
 		} else {
-			result := fmt.Sprintf("[+] Redis:%s unauthorized file:%s/%s", realhost, dir, dbfilename)
+			result := fmt.Sprintf("[+] %v Redis unauthorized file:%s/%s", realhost, dir, dbfilename)
 			common.LogSuccess(result)
 		}
 		err = Expoilt(realhost, conn)
@@ -130,7 +130,7 @@ func Expoilt(realhost string, conn net.Conn) error {
 		return err
 	}
 	if flagSsh == true {
-		result := fmt.Sprintf("[+] Redis:%v like can write /root/.ssh/", realhost)
+		result := fmt.Sprintf("[+] %v Redis like can write /root/.ssh/", realhost)
 		common.LogSuccess(result)
 		if common.RedisFile != "" {
 			writeok, text, err := writekey(conn, common.RedisFile)
@@ -148,7 +148,7 @@ func Expoilt(realhost string, conn net.Conn) error {
 	}
 
 	if flagCron == true {
-		result := fmt.Sprintf("[+] Redis:%v like can write /var/spool/cron/", realhost)
+		result := fmt.Sprintf("[+] %v Redis like can write /var/spool/cron/", realhost)
 		common.LogSuccess(result)
 		if common.RedisShell != "" {
 			writeok, text, err := writecron(conn, common.RedisShell)

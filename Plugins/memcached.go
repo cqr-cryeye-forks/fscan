@@ -24,7 +24,7 @@ func MemcachedScan(info *common.HostInfo) (err error) {
 				n, err := client.Read(rev)
 				if err == nil {
 					if strings.Contains(string(rev[:n]), "STAT") {
-						result := fmt.Sprintf("[+] Memcached %s unauthorized", realhost)
+						result := fmt.Sprintf("[+] %s Memcached unauthorized", realhost)
 						common.LogSuccess(result)
 					}
 				} else {
