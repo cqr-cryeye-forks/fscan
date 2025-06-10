@@ -1094,12 +1094,13 @@ var currentLang = LangEN
 
 func SetLanguage() {
 	// 使用flag设置的语言
-	switch strings.ToLower(Language) {
-	case LangZH, LangEN, LangJA, LangRU:
-		currentLang = strings.ToLower(Language)
-	default:
-		currentLang = LangEN // 不支持的语言默认使用英文
-	}
+// 	switch strings.ToLower(Language) {
+// 	case LangZH, LangEN, LangJA, LangRU:
+// 		currentLang = strings.ToLower(Language)
+// 	default:
+// 		currentLang = LangEN // 不支持的语言默认使用英文
+// 	}
+    currentLang = LangEN
 }
 
 // GetText 获取指定key的当前语言文本
